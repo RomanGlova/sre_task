@@ -1,7 +1,10 @@
 FROM python:3.7.3-alpine
 
-COPY main.py prerequisites.txt /opt/app/
+COPY src/main.py src/prerequisites.txt .env /opt/app/
 
-RUN pip3 install -r /opt/app/prerequisites.txt
+RUN pip3 install -r /opt/app/prerequisites.txt && \
+    chmod +x /opt/app/main.py
 
-ENTRYPOINT ['python /opt/app/main.py']
+WORKDIR "/opt/app"
+
+CMD ["python", "/opt/app/main.py"]

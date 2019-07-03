@@ -1,3 +1,5 @@
+#!/usr/local/bin/python
+
 from flask import Flask
 from flaskext.mysql import MySQL
 import configparser

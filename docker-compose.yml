@@ -11,17 +11,10 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: 'true'
     volumes:
       - ./src/db_init:/docker-entrypoint-initdb.d
-#  adminer:
-#    image: adminer
-#    restart: always
-#    ports:
-#      - 8080:8080
   web:
     build: .
     depends_on:
       - db
-    environment:  # Set up environment variables
-      MYSQL_DATABASE: development
-      MYSQL_PASSWORD: password
     ports:
-      - "5000:5000"  # Forwards the exposed port 30
+      - "8080:5000"
+
