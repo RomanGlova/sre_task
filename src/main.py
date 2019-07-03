@@ -20,9 +20,15 @@ mysql.init_app(app)
 @app.route("/message")
 def message():
     cursor = mysql.connect().cursor()
-    cursor.execute("SELECT message from mytable where 1")
-    return cursor.fetchone()
+    cursor.execute('''SELECT message from mytable where 1''')
+    result = cursor.fetchall()
+    return str(result)
+
+
+@app.route("/")
+def root():
+    return "Test app"
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
