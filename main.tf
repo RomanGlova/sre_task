@@ -16,7 +16,7 @@ resource "aws_security_group" "rds_sec_group" {
   description = "RDS security group"
   egress {
     cidr_blocks = [
-      "172.31.0.0/16"
+      "172.16.0.0/12"
     ]
     from_port = 3306
     protocol = "tcp"
@@ -30,7 +30,7 @@ resource "aws_security_group" "rds_sec_group" {
   ingress = [
     {
       cidr_blocks = [
-        "172.31.0.0/16"
+        "172.16.0.0/12"
       ]
       description = "Incoming mysql"
       from_port = 3306
