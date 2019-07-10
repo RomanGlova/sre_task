@@ -30,7 +30,7 @@ def root():
 
 
 @app.route("/create_table")
-def insert_data():
+def create_table():
     cursor = mysql.connect().cursor()
     cursor.execute('''CREATE TABLE mytable(
     id INT NOT NULL AUTO_INCREMENT, message VARCHAR(255) NOT NULL,
@@ -44,10 +44,7 @@ def insert_data():
 @app.route("/insert")
 def insert_data():
     cursor = mysql.connect().cursor()
-    cursor.execute('''INSERT INTO mytable(message) VALUES 
-    ('Hello World!'),
-    ('foo'),
-    ('bar')''')
+    cursor.execute('''INSERT INTO mytable(message) VALUES ('Hello World!'), ('foo'), ('bar')''')
     result = cursor.fetchall()
     cursor.close()
     return str(result)
