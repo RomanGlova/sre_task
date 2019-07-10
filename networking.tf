@@ -6,7 +6,7 @@ resource "aws_security_group" "rds_sec_group" {
   description = "RDS security group"
   egress {
     cidr_blocks = [
-      "172.31.0.0/16"
+      "172.32.0.0/16"
     ]
     from_port = 3306
     protocol = "tcp"
@@ -20,7 +20,7 @@ resource "aws_security_group" "rds_sec_group" {
   ingress = [
     {
       cidr_blocks = [
-        "172.31.0.0/16"
+        "172.32.0.0/16"
       ]
       description = "Incoming mysql"
       from_port = 3306
@@ -34,11 +34,21 @@ resource "aws_security_group" "rds_sec_group" {
   ]
 }
 
+resource "aws_db_subnet_group" "rds_subnet_group" {
+  name       = "main"
+  subnet_ids = aws_subnet.private.*.id
+
+  tags = {
+    Name = "My DB subnet group"
+  }
+}
+
+
 # Fetch AZs in the current region
 data "aws_availability_zones" "available" {}
 
 resource "aws_vpc" "main" {
-  cidr_block = "172.31.0.0/16"
+  cidr_block = "172.32.0.0/16"
 }
 
 # Create var.az_count private subnets, each in a different AZ

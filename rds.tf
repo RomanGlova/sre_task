@@ -1,9 +1,9 @@
 resource "aws_db_instance" "sre_db" {
   allocated_storage = 20
-  availability_zone = "us-east-1c"
+  availability_zone = "us-east-1a"
   backup_retention_period = 1
   backup_window ="06:29-06:59"
-  db_subnet_group_name = "default"
+  db_subnet_group_name = aws_db_subnet_group.rds_subnet_group.name
   deletion_protection = false
   engine = "mysql"
   engine_version = "8.0.15"
