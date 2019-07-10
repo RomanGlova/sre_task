@@ -39,7 +39,15 @@ resource "aws_ecs_task_definition" "app" {
     "environment": [
       { "name" : "MYSQL_DATABASE", "value" : "${var.sre_task_db_name}" },
       { "name" : "DB_HOST", "value" : "${aws_db_instance.sre_db.address}" }
-    ]
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+                    "awslogs-group": "${aws_cloudwatch_log_group.app_log.name}",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "awslogs"
+      }
+    }
   }
 ]
 DEFINITION
